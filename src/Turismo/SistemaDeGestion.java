@@ -1,6 +1,7 @@
 package Turismo;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,10 +13,11 @@ import java.util.Scanner;
 public class SistemaDeGestion {
 
 	public static void main(String[] args) throws IOException {
-		ArrayList<Usuario> usuarios = cargaDeUsuariosPorArchivo();
-		ArrayList<TodasLasAtracciones> todasLasAtracciones = cargaDeTodasLasAtraccionesYPromocionesPorArchivo();
+		ArrayList<Usuario> usuarios = cargaDeUsuariosPorArchivo("usuariosTierraMedia.txt");
+		ArrayList<TodasLasAtracciones> todasLasAtracciones = cargaDeTodasLasAtraccionesYPromocionesPorArchivo(
+				"atraccionesTierraMedia.txt", "promocionesTierraMedia.txt");
 		Collections.sort(todasLasAtracciones, new Ordenador());
-		generarSugerenciasParaTodos(usuarios, todasLasAtracciones);
+		iniciarSistema(usuarios, todasLasAtracciones);
 	}
 
 	/**
@@ -26,7 +28,7 @@ public class SistemaDeGestion {
 	 *                    TodasLasAtracciones ya ordenadas
 	 */
 
-	private static void generarSugerenciasParaTodos(ArrayList<Usuario> usuarios,
+	private static void iniciarSistema(ArrayList<Usuario> usuarios,
 			ArrayList<TodasLasAtracciones> todasLasAtracciones) {
 
 		for (Usuario u : usuarios) {
@@ -61,6 +63,7 @@ public class SistemaDeGestion {
 			}
 		}
 		contadorDeSugerencias = 0;
+		System.out.println("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_\n");
 	}
 
 	/**
@@ -71,12 +74,11 @@ public class SistemaDeGestion {
 	 */
 	private static void mensajeDeBienvenida(Usuario usuario) {
 		System.out.println(
-				"*********************************************************************************************");
-		System.out.println("Bienvenido " + usuario.getNombre() + ". Usted cuenta con " + usuario.getDineroDisponible()
-				+ " monedas de oro y " + usuario.getTiempoDisponible() + " hs. Su atraccion preferida es "+ usuario.getAtraccionPreferida().getNombreDeTipo());
-		System.out.println(" ");
-		System.out.println("A continuacion se le presentaran sugerencias para mejorar su estadia en el parque:");
-		System.out.println(" ");
+				"Bienvenido " + usuario.getNombre() + "!\n- Dinero disponible: " + usuario.getDineroDisponible()
+						+ " monedas de oro\n- Tiempo disponible: " + usuario.getTiempoDisponible()
+						+ " horas\n- Tipo preferido: " + usuario.getAtraccionPreferida().getNombreDeTipo());
+		System.out.println("");
+		System.out.println("Armá tu propia estadía en nuestro parque con las siguientes sugerencias!\n");
 	}
 
 	/**
@@ -98,17 +100,17 @@ public class SistemaDeGestion {
 	 *        cual salva dentro de catch llamando nuevamente el metodo
 	 */
 
-	@SuppressWarnings("static-access")
 	private static void confirmacion(Usuario usuario, TodasLasAtracciones sugerencia) {
 		if (usuario.tieneDineroDisponible(sugerencia) && usuario.tieneTiempoDisponible(sugerencia)
 				&& sugerencia.hayCupo()) {
 			contadorDeSugerencias++;
-			System.out.println(contadorDeSugerencias + ") " + sugerencia.toString());
-			System.out.println("Desea aceptar la sugerencia? - Presione S/N y enter");
+			System.out.println(contadorDeSugerencias + ") " + sugerencia.toString() + "\n");
+			System.out.println("Desea aceptar la sugerencia? - Ingrese S/N");
 			@SuppressWarnings("resource")
 			Scanner in = new Scanner(System.in);
 			String caracter = in.nextLine();
 			caracter = caracter.toLowerCase();
+			System.out.println("");
 
 			try {
 				if (caracter.equals("s")) {
@@ -173,15 +175,16 @@ public class SistemaDeGestion {
 	 * nombre,tipoPreferido,dinero,tiempo.
 	 * 
 	 * @return Regresa un Arraylist con todos los usuarios
+	 * @throws IOException
 	 */
 
-	private static ArrayList<Usuario> cargaDeUsuariosPorArchivo() {
+	private static ArrayList<Usuario> cargaDeUsuariosPorArchivo(String archivoUsuarios) throws IOException {
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 		FileReader fr = null;
 		BufferedReader br = null;
-		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
 		try {
-			fr = new FileReader("usuariosTierraMedia.txt");
+			fr = new FileReader(archivoUsuarios);
 			br = new BufferedReader(fr);
 			String linea;
 			while ((linea = br.readLine()) != null) {
@@ -194,10 +197,10 @@ public class SistemaDeGestion {
 					Usuario usuario = new Usuario(nombre, dineroDisponible, tiempoDisponible, tipoPreferido);
 					usuarios.add(usuario);
 				} catch (NumberFormatException e) {
-					System.out.println("Uno de los datos leidos no es un correcto");
+					System.out.println("Dato ingresado inválido durante la lectura de usuarios.");
 				}
 			}
-		} catch (IOException e) {
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		return usuarios;
@@ -209,14 +212,15 @@ public class SistemaDeGestion {
 	 * ser: "nombre",costo,tiemoi,cupo,tipoDeAtraccion
 	 * 
 	 * @return Regresa un Arraylist con todas las Atracciones
+	 * @throws IOException
 	 */
 
-	private static ArrayList<Atraccion> cargaDeAtraccionesPorArchivo() {
+	private static ArrayList<Atraccion> cargaDeAtraccionesPorArchivo(String archivoAtracciones) throws IOException {
+		ArrayList<Atraccion> atracciones = new ArrayList<Atraccion>();
 		FileReader fr = null;
 		BufferedReader br = null;
-		ArrayList<Atraccion> atracciones = new ArrayList<Atraccion>();
 		try {
-			fr = new FileReader("atraccionesTierraMedia.txt");
+			fr = new FileReader(archivoAtracciones);
 			br = new BufferedReader(fr);
 			String linea;
 
@@ -231,10 +235,10 @@ public class SistemaDeGestion {
 					Atraccion atraccion = new Atraccion(nombre, costo, cupo, tiempo, tipo);
 					atracciones.add(atraccion);
 				} catch (NumberFormatException e) {
-					System.out.println("ATRACCION Uno de los datos leidos no es un double");
+					System.out.println("Dato ingresado inválido durante la lectura de atracciones.");
 				}
 			}
-		} catch (IOException e) {
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		return atracciones;
@@ -248,55 +252,52 @@ public class SistemaDeGestion {
 	 * de una promocion deben ser del mismo tipo y contener al menos una.
 	 * 
 	 * @return Regresa un Arraylist con todas las Atracciones y Promociones
+	 * @throws IOException
 	 */
-	private static ArrayList<TodasLasAtracciones> cargaDeTodasLasAtraccionesYPromocionesPorArchivo() {
+	private static ArrayList<TodasLasAtracciones> cargaDeTodasLasAtraccionesYPromocionesPorArchivo(
+			String archivoAtracciones, String archivoPromociones) throws IOException {
+		ArrayList<Atraccion> atracciones = cargaDeAtraccionesPorArchivo(archivoAtracciones);
+		ArrayList<TodasLasAtracciones> todasLasAtracciones = new ArrayList<TodasLasAtracciones>();
+		todasLasAtracciones.addAll(atracciones);
+
 		FileReader fr = null;
 		BufferedReader br = null;
-		ArrayList<Atraccion> atracciones = cargaDeAtraccionesPorArchivo();
-		ArrayList<TodasLasAtracciones> todasLasAtracciones = new ArrayList<TodasLasAtracciones>();
-
 		try {
-			fr = new FileReader("promocionesTierraMedia.txt");
+			fr = new FileReader(archivoPromociones);
 			br = new BufferedReader(fr);
 			String linea;
-			String tipoDePromo = "";
-			String nombrePromocion = "";
-			Integer porcentajeDeDescuento = null;
-			ArrayList<Atraccion> atraccionesParaLaPromo = null;
 
 			while ((linea = br.readLine()) != null) {
 				try {
 					String[] campos = linea.split(",");
 					int cantidadDeAtraccionesEnPromo = campos.length - 4;
-					tipoDePromo = campos[0];
-					nombrePromocion = campos[1];
+					String tipoDePromo = campos[0];
+					String nombrePromocion = campos[1];
 					TipoDeAtraccion tipoDeAtraccion = TipoDeAtraccion.valueOf(campos[2]);
-					porcentajeDeDescuento = Integer.parseInt(campos[3]);
-					atraccionesParaLaPromo = new ArrayList<Atraccion>();
-					if (cantidadDeAtraccionesEnPromo > 0) {
+					int descuento = Integer.parseInt(campos[3]);
+					ArrayList<Atraccion> atraccionesPromocion = new ArrayList<Atraccion>();
+					if (cantidadDeAtraccionesEnPromo > 1) {
 						for (int i = 0; i < cantidadDeAtraccionesEnPromo; i++) {
 							for (Atraccion a : atracciones) {
-								if (a.getNombreDeAtraccion().contains(campos[i + 4])) {
-									atraccionesParaLaPromo.add(a);
+								if (a.getNombreDeAtraccion().equals(campos[i + 4])) {
+									atraccionesPromocion.add(a);
 								}
 							}
 						}
-						if (todasSonDelMismoTipo(atraccionesParaLaPromo, tipoDeAtraccion)) {
-							crearPromocionSegunTipo(todasLasAtracciones, tipoDePromo, nombrePromocion,
-									porcentajeDeDescuento, atraccionesParaLaPromo);
+						if (todasSonDelMismoTipo(atraccionesPromocion, tipoDeAtraccion)) {
+							Promocion promocion = crearPromocionSegunTipo(tipoDePromo, nombrePromocion, descuento,
+									atraccionesPromocion);
+							todasLasAtracciones.add(promocion);
 						}
 					}
 				} catch (NumberFormatException e) {
-					System.out.println("PROMOCION Uno de los datos leidos no es un double");
+					System.out.println("Dato ingresado inválido durante la lectura de promociones.");
 				}
 			}
 
-		} catch (
-
-		IOException e) {
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		todasLasAtracciones.addAll(atracciones);
 		return todasLasAtracciones;
 	}
 
@@ -308,31 +309,32 @@ public class SistemaDeGestion {
 	 */
 	private static boolean todasSonDelMismoTipo(ArrayList<Atraccion> atraccionesParaLaPromo,
 			TipoDeAtraccion tipoDePromo) {
+		boolean valor = true;
 		for (Atraccion a : atraccionesParaLaPromo) {
 			if (!a.getTipoDeAtraccion().equals(tipoDePromo))
-				return false;
+				valor = false;
 		}
-		return true;
+		return valor;
 	}
 
 	/**
 	 * Metodo que crea la promocion segun el tipo ingresado en el archivo
 	 * 
+	 * @return
+	 * 
 	 */
-	private static void crearPromocionSegunTipo(ArrayList<TodasLasAtracciones> todasLasAtracciones, String tipoDePromo,
-			String nombrePromocion, Integer porcentajeDeDescuento, ArrayList<Atraccion> atraccionesParaLaPromo) {
+	private static Promocion crearPromocionSegunTipo(String tipoDePromo, String nombrePromocion, Integer descuento,
+			ArrayList<Atraccion> atraccionesParaLaPromo) {
+		Promocion promocion = null;
 		if (tipoDePromo.contains("Absoluta")) {
-			Promocion promocion = new PromocionAbsoluta(nombrePromocion, atraccionesParaLaPromo, porcentajeDeDescuento);
-			todasLasAtracciones.add(promocion);
+			promocion = new PromocionAbsoluta(nombrePromocion, atraccionesParaLaPromo, descuento);
 		}
 		if (tipoDePromo.contains("Porcentual")) {
-			Promocion promocion = new PromocionPorcentual(nombrePromocion, atraccionesParaLaPromo,
-					porcentajeDeDescuento);
-			todasLasAtracciones.add(promocion);
+			promocion = new PromocionPorcentual(nombrePromocion, atraccionesParaLaPromo, descuento);
 		}
 		if (tipoDePromo.contains("AxB")) {
-			Promocion promocion = new PromocionAxB(nombrePromocion, atraccionesParaLaPromo);
-			todasLasAtracciones.add(promocion);
+			promocion = new PromocionAxB(nombrePromocion, atraccionesParaLaPromo);
 		}
+		return promocion;
 	}
 }
