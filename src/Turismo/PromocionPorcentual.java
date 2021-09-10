@@ -27,6 +27,4 @@ public class PromocionPorcentual extends Promocion {
 		return (int) (super.getCosto() * (100 - this.getDescuento()) / 100);
 	}
 
-	
-	
 }

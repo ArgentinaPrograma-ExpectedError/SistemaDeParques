@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class SistemaDeGestion {
 
 	public static void main(String[] args) throws IOException {
+		System.out.println("************************PARQUE DE ATRACCIONES TIERRA MEDIA************************\n");
 		ArrayList<Usuario> usuarios = cargaDeUsuariosPorArchivo("usuariosTierraMedia.txt");
 		ArrayList<TodasLasAtracciones> todasLasAtracciones = cargaDeTodasLasAtraccionesYPromocionesPorArchivo(
 				"atraccionesTierraMedia.txt", "promocionesTierraMedia.txt");
@@ -63,6 +64,8 @@ public class SistemaDeGestion {
 			}
 		}
 		contadorDeSugerencias = 0;
+		System.out.println("Ha terminado tu compra.");
+		System.out.println("\nEn instantes estará disponible su itinerario. Gracias!");
 		System.out.println("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_\n");
 	}
 
@@ -73,10 +76,10 @@ public class SistemaDeGestion {
 	 * @param Usuario usuario
 	 */
 	private static void mensajeDeBienvenida(Usuario usuario) {
-		System.out.println(
-				"Bienvenido " + usuario.getNombre() + "!\n- Dinero disponible: " + usuario.getDineroDisponible()
-						+ " monedas de oro\n- Tiempo disponible: " + usuario.getTiempoDisponible()
-						+ " horas\n- Tipo preferido: " + usuario.getAtraccionPreferida().getNombreDeTipo());
+		System.out.println("Bienvenido " + usuario.getNombre() + "!\n- Dinero disponible: "
+				+ usuario.getDineroDisponible() + " monedas de oro\n- Tiempo disponible: "
+				+ usuario.getTiempoDisponible() + " horas\n- Tipo preferido: "
+				+ usuario.getAtraccionPreferida().getNombreDeTipo().toUpperCase());
 		System.out.println("");
 		System.out.println("Armá tu propia estadía en nuestro parque con las siguientes sugerencias!\n");
 	}

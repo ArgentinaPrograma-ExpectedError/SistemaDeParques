@@ -83,8 +83,8 @@ public class Atraccion implements TodasLasAtracciones, Comparable<Atraccion> {
 
 	@Override
 	public String toString() {
-		return nombreDeAtraccion + " - " + tipoDeAtraccion.getNombreDeTipo() + "\n- Precio: " + costoDevisita
-				+ " monedas de oro \n- Duración: " + tiempoPromedioDeUso + " horas";
+		return nombreDeAtraccion + " - " + tipoDeAtraccion.getNombreDeTipo().toUpperCase() + "\n- Precio: "
+				+ costoDevisita + " monedas de oro \n- Duración: " + tiempoPromedioDeUso + " horas";
 	}
 
 	@Override

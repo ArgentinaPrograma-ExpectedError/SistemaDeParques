@@ -93,9 +93,9 @@ public abstract class Promocion implements TodasLasAtracciones, Comparable<Promo
 
 	@Override
 	public String toString() {
-		return nombrePromocion + " - " + tipoDeAtraccion.getNombreDeTipo() + "\n" + "- Atracciones incluidas: "
-				+ toStringAtracciones(atraccionesIncluidas) + "\n" + "- Precio: " + this.getCosto()
-				+ " monedas de oro\n- Duración: " + this.getTiempo() + " horas";
+		return nombrePromocion + " - " + tipoDeAtraccion.getNombreDeTipo().toUpperCase() + "\n"
+				+ "- Atracciones incluidas: " + toStringAtracciones(atraccionesIncluidas) + "\n" + "- Precio: "
+				+ this.getCosto() + " monedas de oro\n- Duración: " + this.getTiempo() + " horas";
 	}
 
 	protected String toStringAtracciones(ArrayList<Atraccion> atraccionesDeLaPromocion) {

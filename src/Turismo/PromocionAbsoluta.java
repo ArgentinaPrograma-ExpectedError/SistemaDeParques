@@ -5,8 +5,7 @@ import java.util.ArrayList;
 public class PromocionAbsoluta extends Promocion {
 	private int descuento;
 
-	public PromocionAbsoluta(String nombrePromocion, ArrayList<Atraccion> atraccionesDeLaPromocion,
-			int descuento) {
+	public PromocionAbsoluta(String nombrePromocion, ArrayList<Atraccion> atraccionesDeLaPromocion, int descuento) {
 		super(nombrePromocion, atraccionesDeLaPromocion);
 		this.descuento = setDescuento(descuento);// se deberia controlar antes de crear el metodo y lanzar una excepcion
 	}
