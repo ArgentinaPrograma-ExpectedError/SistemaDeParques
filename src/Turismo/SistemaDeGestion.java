@@ -64,8 +64,7 @@ public class SistemaDeGestion {
 			}
 		}
 		contadorDeSugerencias = 0;
-		System.out.println("Ha terminado tu compra.");
-		System.out.println("\nEn instantes estará disponible su itinerario. Gracias!");
+		System.out.println("Ha terminado tu compra. En instantes estará disponible tu itinerario. Gracias!");
 		System.out.println("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_\n");
 	}
 
@@ -113,7 +112,6 @@ public class SistemaDeGestion {
 			Scanner in = new Scanner(System.in);
 			String caracter = in.nextLine();
 			caracter = caracter.toLowerCase();
-			System.out.println("");
 
 			try {
 				if (caracter.equals("s")) {
