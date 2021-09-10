@@ -1,0 +1,10 @@
+Steve Jobs,AVENTURA,10,8
+Sergey Brin,PAISAJE,100,5
+Elon Musk,DEGUSTACION,36,8
+Kevin Mitnick,PAISAJE,120,6
+Larry Ellison,AVENTURA,150,8
+Mark Zuckerberg,DEGUSTACION,30,4
+Bill Gates,AVENTURA,2,5
+Satya Nadella,PAISAJE,50,6
+Jeff Bezos,DEGUSTACION,70,4
+Eric Schmidt,PAISAJE,28,2.5

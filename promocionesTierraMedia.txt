@@ -1,0 +1,12 @@
+Absoluta,Lomas del Silencio,PAISAJE,10,Minas Tirith,Gondor,Erebor
+Absoluta,Valles Secos,PAISAJE,12,Abismo de Helm,Harad
+Absoluta,Tiene Atracciones que no son del mismo Tipo,PAISAJE,12,Abismo de Helm,Sindarin
+Absoluta,Colina Mortal,AVENTURA,5,Mordor,Bosque Negro,Moria
+Porcentual,Grandes Condados,PAISAJE,10,Erebor,Harad,Gondor
+Porcentual,No tiene Atracciones,PAISAJE,20
+Porcentual,Espadas de Ultratumba,AVENTURA,40,Lim Claro,Bosque Negro
+Porcentual,Dulzura Medieval,DEGUSTACION,30,Forodwaith,Lothlorien,Sindarin
+Porcentual,Bosques Bajos,PAISAJE,20,Erebor,Harad,Gondor
+AxB,Sabores del Fuego,DEGUSTACION,0,Forodwaith,La Comarca,Lothlorien
+AxB,Guisados Vivos,DEGUSTACION,0,Mar de Rhun,Sindarin
+AxB,Lagos Profundos,PAISAJE,0,Abismo de Helm,Harad
