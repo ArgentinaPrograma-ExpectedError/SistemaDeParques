@@ -85,27 +85,25 @@ public abstract class Promocion implements TodasLasAtracciones, Comparable<Promo
 
 	@Override
 	public int compareTo(Promocion o) {
-			if ( this.getCosto().compareTo(o.getCosto())== 0) {
-				return this.getTiempo().compareTo(o.getTiempo()) * -1;
-			} else
-				return this.getCosto().compareTo(o.getCosto()) * -1;
+		if (this.getCosto().compareTo(o.getCosto()) == 0) {
+			return this.getTiempo().compareTo(o.getTiempo()) * -1;
+		} else
+			return this.getCosto().compareTo(o.getCosto()) * -1;
 	}
-	
 
 	@Override
 	public String toString() {
-		return "Promocion: " + nombrePromocion + " - Tipo de las atracciones: " + tipoDeAtraccion.getNombreDeTipo()
-				+ "\n" + "Atracciones incluidas: " + toStringAtracciones(atraccionesIncluidas) + "\n"
-				+ "Costo total: " + this.getCosto() + " monedas de oro - Tiempo total: " + this.getTiempo() + " hs.";
+		return nombrePromocion + " - " + tipoDeAtraccion.getNombreDeTipo().toUpperCase() + "\n"
+				+ "- Atracciones incluidas: " + toStringAtracciones(atraccionesIncluidas) + "\n" + "- Precio: "
+				+ this.getCosto() + " monedas de oro\n- Duración: " + this.getTiempo() + " horas";
 	}
-
-
 
 	protected String toStringAtracciones(ArrayList<Atraccion> atraccionesDeLaPromocion) {
 		String s = "";
 		for (Atraccion a : atraccionesDeLaPromocion) {
-			s += a.toStringParaPromo();
+			s += a.getNombreDeAtraccion() + ", ";
 		}
+		s = s.substring(0, s.length() - 2);
 		return s;
 	}
 }

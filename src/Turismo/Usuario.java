@@ -65,7 +65,7 @@ public class Usuario {
 	public TipoDeAtraccion getAtraccionPreferida() {
 		return atraccionPreferida;
 	}
-	
+
 	public void setSugerenciasConfirmadas(TodasLasAtracciones confirmada) {
 		this.sugerenciasConfirmadas.addAll(confirmada.getAtraccionesIncluidas());
 	}
@@ -93,14 +93,13 @@ public class Usuario {
 		}
 		return resultado;
 	}
-	
+
 	public boolean tieneDineroDisponible(TodasLasAtracciones sugerencia) {
-		return getDineroDisponible()>=sugerencia.getCosto();
+		return getDineroDisponible() >= sugerencia.getCosto();
 	}
 
 	public boolean tieneTiempoDisponible(TodasLasAtracciones sugerencia) {
-		return getTiempoDisponible()>=sugerencia.getTiempo();
+		return getTiempoDisponible() >= sugerencia.getTiempo();
 	}
 
-	
 }

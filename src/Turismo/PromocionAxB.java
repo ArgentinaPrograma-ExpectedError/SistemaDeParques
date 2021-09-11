@@ -14,7 +14,7 @@ public class PromocionAxB extends Promocion {
 	private Integer getDescuento() {
 		return this.descuento;
 	}
-	
+
 	/**
 	 * Metodo para obtener el descuento de la promo
 	 * 
@@ -22,8 +22,8 @@ public class PromocionAxB extends Promocion {
 	 */
 	private Integer setDescuento() {
 		ArrayList<Atraccion> atracciones = getAtraccionesIncluidas();
-		 Collections.sort(atracciones);
-		return atracciones.get(atracciones.size()-1).getCosto();
+		Collections.sort(atracciones);
+		return atracciones.get(atracciones.size() - 1).getCosto();
 	}
 	/*
 	 * public Atraccion atraccionGratis() { Atraccion[] atracciones =
@@ -35,9 +35,5 @@ public class PromocionAxB extends Promocion {
 	public Integer getCosto() {
 		return super.getCosto() - this.getDescuento();
 	}
-
-
-
-	
 
 }

@@ -1,7 +1,7 @@
-Absoluta,Lomas del Silencio,PAISAJE,10,Minas Tirith,Gondor,Erebor
-Absoluta,Valles Secos,PAISAJE,12,Abismo de Helm,Harad
+Absoluta,Lomas del Silencio,PAISAJE,40,Minas Tirith,Gondor,Erebor
+Absoluta,Valles Secos,PAISAJE,43,Abismo de Helm,Harad
 Absoluta,Tiene Atracciones que no son del mismo Tipo,PAISAJE,12,Abismo de Helm,Sindarin
-Absoluta,Colina Mortal,AVENTURA,5,Mordor,Bosque Negro,Moria
+Absoluta,Colina Mortal,AVENTURA,33,Mordor,Bosque Negro,Moria
 Porcentual,Grandes Condados,PAISAJE,10,Erebor,Harad,Gondor
 Porcentual,No tiene Atracciones,PAISAJE,20
 Porcentual,Espadas de Ultratumba,AVENTURA,40,Lim Claro,Bosque Negro

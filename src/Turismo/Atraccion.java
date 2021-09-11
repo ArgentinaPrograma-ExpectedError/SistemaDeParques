@@ -50,12 +50,11 @@ public class Atraccion implements TodasLasAtracciones, Comparable<Atraccion> {
 
 	@Override
 	public int compareTo(Atraccion o) {
-			if ( this.getCosto().compareTo(o.getCosto())== 0) {
-				return this.getTiempo().compareTo(o.getTiempo()) * -1;
-			} else
-				return this.getCosto().compareTo(o.getCosto()) * -1;
-		}
-
+		if (this.getCosto().compareTo(o.getCosto()) == 0) {
+			return this.getTiempo().compareTo(o.getTiempo()) * -1;
+		} else
+			return this.getCosto().compareTo(o.getCosto()) * -1;
+	}
 
 	@Override
 	public int hashCode() {
@@ -84,8 +83,8 @@ public class Atraccion implements TodasLasAtracciones, Comparable<Atraccion> {
 
 	@Override
 	public String toString() {
-		return nombreDeAtraccion + ". Costo " + costoDevisita + " monedas de oro - Tiempo de uso: " + tiempoPromedioDeUso
-				+ "hs - Tipo: " + tipoDeAtraccion.getNombreDeTipo() + " \n";
+		return nombreDeAtraccion + " - " + tipoDeAtraccion.getNombreDeTipo().toUpperCase() + "\n- Precio: "
+				+ costoDevisita + " monedas de oro \n- Duración: " + tiempoPromedioDeUso + " horas";
 	}
 
 	@Override
