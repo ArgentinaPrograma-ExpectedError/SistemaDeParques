@@ -2,6 +2,7 @@ package Turismo;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.junit.Before;
@@ -10,7 +11,7 @@ import org.junit.Test;
 public class SistemaTest {
 	Usuario usuario1;
 	Usuario usuario2;
-	
+
 	Atraccion atraccion1;
 	Atraccion atraccion2;
 	Atraccion atraccion3;
@@ -19,9 +20,10 @@ public class SistemaTest {
 	Promocion promocion1;
 	Promocion promocion2;
 	Promocion promocion3;
+	Parque parque;
 
 	@Before
-	public void setup() {
+	public void setup() throws IOException {
 		usuario1 = new Usuario("Juan Carlos", 23, 160, TipoDeAtraccion.PAISAJE);
 		usuario2 = new Usuario("Juana De Arco", 12, 150, TipoDeAtraccion.DEGUSTACION);
 
@@ -35,13 +37,15 @@ public class SistemaTest {
 		ArrayList<Atraccion> a2 = new ArrayList<Atraccion>();
 		a2.add(atraccion4);
 		a2.add(atraccion2);
-        ArrayList<Atraccion> a3 = new ArrayList<Atraccion>();
+		ArrayList<Atraccion> a3 = new ArrayList<Atraccion>();
 		a3.add(atraccion4);
 		a3.add(atraccion3);
 		a3.add(atraccion1);
-		promocion1 = new PromocionAbsoluta("Aventura",a1, 2);
+		promocion1 = new PromocionAbsoluta("Aventura", a1, 20);
 		promocion2 = new PromocionPorcentual("Paisajes ", a2, 50);
-		promocion3 = new PromocionAxB("Degustacion",a3);
+		promocion3 = new PromocionAxB("Degustacion", a3);
+		
+		parque= new Parque();
 	}
 
 	@Test
@@ -75,7 +79,7 @@ public class SistemaTest {
 
 	@Test
 	public void metodosDePromocionesTest() {
-		assertEquals(16, promocion1.getCosto(), 0);
+		assertEquals(20, promocion1.getCosto(), 0);
 		assertEquals(12, promocion2.getCosto(), 0);
 		assertEquals(19, promocion3.getCosto(), 0);
 		assertEquals(27, promocion2.calcularTiempoDePromocion(), 0);
@@ -85,15 +89,14 @@ public class SistemaTest {
 	}
 
 	@Test
-	public void metodosDeGestionTest() {
+	public void metodosDeParqueTest() {
 		usuario1.confirmarSugerencia(atraccion1);
 		assertTrue(usuario1.getSugerenciasConfirmadas().contains(atraccion1));
 		usuario2.confirmarSugerencia(promocion2);
 		assertTrue(usuario2.getSugerenciasConfirmadas().contains(atraccion4));
 		usuario2.confirmarSugerencia(atraccion3);
 		assertFalse(usuario2.yaLaCompro(atraccion1));
-		assertTrue(SistemaDeGestion.sonDelGustoDelUsuario(usuario2, atraccion3));	
+		assertTrue(parque.sonDelGustoDelUsuario(usuario2, atraccion3));
 	}
-
 
 }
